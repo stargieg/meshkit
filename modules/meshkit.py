@@ -95,11 +95,11 @@ def dict_pkg_info(ibpath,target,savedir):
         out = out.replace("Available Profiles:\n", "")
         info = {}
         # Get Default packages
-        pattern = r'(Default Packages:\s.*)'
-        regex = re.compile(pattern)
+        # pattern = r'(Default Packages:\s.*)'
+        # regex = re.compile(pattern)
         info['defpkgs'] = []
-        for match in regex.finditer(out):
-            info['defpkgs'] = match.group(0).replace("Default Packages: ", "").split(" ")
+        # for match in regex.finditer(out):
+        #     info['defpkgs'] = match.group(0).replace("Default Packages: ", "").split(" ")
 
         # get packages info
         pattern = r'([\w-]+:\n.*\n.*)\s+'
@@ -179,7 +179,8 @@ def get_defaultpkgs(ibpath,target,savedir):
 
     """
     info = dict_pkg_info(ibpath,target,savedir)
-    return info['defpkgs']
+    #return info['defpkgs']
+    return ['base-files']
 
 
 

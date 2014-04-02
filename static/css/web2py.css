@@ -32,7 +32,7 @@ code { font-family: Courier;}
 input[type=text], input[type=password] { width: 300px; }
 select { width: 310px; }
 
-ul { margin: 0 0 0 1em; padding: 0px; }
+ul { margin: 0 0 0 1em; padding: 0px; list-style: none outside none;}
 /** end **/
 
 /* Sticky footer begin */
@@ -165,6 +165,135 @@ div.error {
 #navbar {float: right; padding: .4em 0;}
 
 #menu {padding-top: .2em;}
+
+#download {float: left;padding: .5em 2em 0 0;}
+
+header div > ul.secondary-nav .menu-dropdown, .nav.secondary-nav .menu-dropdown, header div > ul.secondary-nav .dropdown-menu, .nav.secondary-nav .dropdown-menu {
+    border: 0 none;
+    right: 0;
+}
+header div > ul a.menud:hover, .nav a.menud:hover, header div > ul li.open .menud, .nav li.open .menud, header div > ul .dropdown-toggle:hover, .nav .dropdown-toggle:hover, header div > ul .dropdown.open .dropdown-toggle, .nav .dropdown.open .dropdown-toggle {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.05);
+}
+header div > ul .menu-dropdown, .nav .menu-dropdown, header div > ul .dropdown-menu, .nav .dropdown-menu {
+    background-color: #333333;
+}
+header div > ul .menu-dropdown a.menud, .nav .menu-dropdown a.menud, header div > ul .dropdown-menu a.menud, .nav .dropdown-menu a.menud, header div > ul .menu-dropdown .dropdown-toggle, .nav .menu-dropdown .dropdown-toggle, header div > ul .dropdown-menu .dropdown-toggle, .nav .dropdown-menu .dropdown-toggle {
+    color: #FFFFFF;
+}
+header div > ul .menu-dropdown a.menu.open, .nav .menu-dropdown a.menu.open, header div > ul .dropdown-menu a.menu.open, .nav .dropdown-menu a.menu.open, header div > ul .menu-dropdown .dropdown-toggle.open, .nav .menu-dropdown .dropdown-toggle.open, header div > ul .dropdown-menu .dropdown-toggle.open, .nav .dropdown-menu .dropdown-toggle.open {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.05);
+}
+header div > ul .menu-dropdown li a, .nav .menu-dropdown li a, header div > ul .dropdown-menu li a, .nav .dropdown-menu li a {
+    color: #999999;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+}
+header div > ul .menu-dropdown li a:hover, .nav .menu-dropdown li a:hover, header div > ul .dropdown-menu li a:hover, .nav .dropdown-menu li a:hover {
+    background-color: #191919;
+    background-image: -moz-linear-gradient(center top , #292929, #191919);
+    background-repeat: repeat-x;
+    color: #FFFFFF;
+}
+header div > ul .menu-dropdown .active a, .nav .menu-dropdown .active a, header div > ul .dropdown-menu .active a, .nav .dropdown-menu .active a {
+    color: #FFFFFF;
+}
+header div > ul .menu-dropdown .divider, .nav .menu-dropdown .divider, header div > ul .dropdown-menu .divider, .nav .dropdown-menu .divider {
+    background-color: #222222;
+    border-color: #444444;
+}
+header ul .menu-dropdown li a, header ul .dropdown-menu li a {
+    padding: 4px 15px;
+}
+li.menud, .dropdown {
+    position: relative;
+}
+a.menud {
+    font-weight: bold;
+}
+a.menud:after, .dropdown-toggle:after {
+    border-left: 4px solid rgba(0, 0, 0, 0);
+    border-right: 4px solid rgba(0, 0, 0, 0);
+    border-top: 4px solid #FFFFFF;
+    content: "&darr";
+    display: inline-block;
+    height: 0;
+    margin-left: 4px;
+    margin-top: 8px;
+    opacity: 1;
+    text-indent: -99999px;
+    vertical-align: top;
+    width: 0;
+    font-weight: bold;
+}
+.menu-dropdown, .dropdown-menu {
+    background-clip: padding-box;
+    background-color: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 6px 6px;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: none;
+    float: left;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 220px;
+    min-width: 200px;
+    padding: 6px 0;
+    position: absolute;
+    top: 13px;
+    z-index: 900;
+    font-weight: bold;
+}
+.menu-dropdown li, .dropdown-menu li {
+    display: block;
+    float: none;
+}
+.menu-dropdown .divider, .dropdown-menu .divider {
+    background-color: #EEEEEE;
+    border-bottom: 1px solid #FFFFFF;
+    height: 1px;
+    margin: 5px 0;
+    overflow: hidden;
+}
+header .dropdown-menu a, .dropdown-menu a {
+    clear: both;
+    color: #808080;
+    display: block;
+    font-weight: normal;
+    line-height: 18px;
+    padding: 4px 15px;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+header .dropdown-menu a:hover, .dropdown-menu a:hover, header .dropdown-menu a.hover, .dropdown-menu a.hover {
+    background-color: #DDDDDD;
+    background-image: -moz-linear-gradient(center top , #EEEEEE, #DDDDDD);
+    background-repeat: repeat-x;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.024) inset, 0 -1px rgba(0, 0, 0, 0.024) inset;
+    color: #404040;
+    text-decoration: none;
+}
+.open .menud, .dropdown.open .menud, .open .dropdown-toggle, .dropdown.open .dropdown-toggle {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+}
+.open .menu-dropdown, .dropdown.open .menu-dropdown, .open .dropdown-menu, .dropdown.open .dropdown-menu {
+    display: block;
+}
+.dropdown:hover ul.dropdown-menu {
+    display: block;
+}
+.dropdown-menu .dropdown-menu {
+    left: 159px;
+    position: absolute;
+}
+.dropdown-menu li {
+    position: relative;
+}
+
+
+
+
 
 .right {
 	   width:100%;

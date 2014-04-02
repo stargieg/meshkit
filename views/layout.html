@@ -72,62 +72,89 @@
 
 </head>
 <body>
-  <div class="wrapper"><!-- for sticky footer -->
-  
-    <div class="topbar">
-      <div class="container">    
-        <div class="sixteen columns">
-          <div id="navbar">{{='auth' in globals() and auth.navbar(separators=(' ',' | ',''))}}</div>
-          {{is_mobile=request.user_agent().is_mobile}}
-      {{if response.menu:}}
-          <div id="menu">
-             {{=MENU(response.menu, _class='mobile-menu' if is_mobile else 'sf-menu',mobile=is_mobile)}}
-          </div>
-          {{pass}}
-        </div>
-      </div>
-    </div><!-- topbar -->
-    
-    <div class="flash">{{=response.flash or ''}}</div>
-    
-    <div class="header">
-      <div class="container">         
-        <div class="sixteen columns">
-          <div class="sitetitle">
-            <h1 class="remove-bottom title" style="margin-top: .5em;">
-            {{=response.title or request.application}}
-            </h1>
-            <h5>{{=response.subtitle or ''}}</h5>
-          </div>
-          <div class="sitelogo">
-            <img src="{{=URL('static','images/logo.png')}}" />
-          </div>
-        </div>
-        <div class="sixteen columns">
-          <div class="statusbar clearfix">
-            {{block statusbar}}
-            <div class="breadcrumbs">{{=request.function.replace('_', ' ').title()}}</div>
-            <div id="languageselect" style="float:right">
-                <script>
-                    function set_lang(lang) {
-                        var date = new Date();
-                        cookieDate=date.setTime(date.getTime()+(100*24*60*60*1000));
-                        document.cookie='all_lang='+lang+';expires='+cookieDate+'';
-                        window.location.reload();
-                    };
-                </script>
-                <select name="adminlanguage" onchange="set_lang(jQuery(this).val())" style="width: 100px;">
-                    {{for language in T.get_possible_languages():}}
-                        <option {{=T.accepted_language==language and 'selected' or ''}} value="{{=language}}">{{=T(language)}}</option>
-                    {{pass}}
-                </select>
-            </div>
-            
-            {{end}}
-          </div>
-        </div>
-      </div>
-    </div>
+	<div class="wrapper"><!-- for sticky footer -->
+		<div class="topbar">
+			<div class="container">
+				<div class="sixteen columns">
+					<div id="download">
+						<ul class="download">
+							<li class="dropdown">
+								<a class="menud" href="#">
+								Downloads
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="http://download.berlin.freifunk.net/attitude_adjustment/">
+											Stable: Attitude Adjustment
+										</a>
+									</li>
+									<li>
+										<a href="http://firmware.berlin.freifunk.net/attitude_adjustment/">
+											Testing: Attitude Adjustment
+										</a>
+									</li>
+									<li>
+										<a href="http://firmware.berlin.freifunk.net/barrier_breaker/">
+											Testing: Barrier Breaker
+										</a>
+									</li>
+								</ul><!-- dropdown-menu -->
+							</li><!-- dropdown-->
+						<ul><!-- download-->
+					</div>
+					<div id="navbar">
+						{{='auth' in globals() and auth.navbar(separators=(' ',' | ',''))}}
+					</div>
+					{{is_mobile=request.user_agent().is_mobile}}
+					{{if response.menu:}}
+					<div id="menu">
+						{{=MENU(response.menu, _class='mobile-menu' if is_mobile else 'sf-menu',mobile=is_mobile)}}
+					</div>
+					{{pass}}
+				</div>
+			</div>
+		</div><!-- topbar -->
+
+		<div class="flash">{{=response.flash or ''}}</div>
+		
+		<div class="header">
+		  <div class="container">         
+			<div class="sixteen columns">
+			  <div class="sitetitle">
+				<h1 class="remove-bottom title" style="margin-top: .5em;">
+				{{=response.title or request.application}}
+				</h1>
+				<h5>{{=response.subtitle or ''}}</h5>
+			  </div>
+			  <div class="sitelogo">
+				<img src="{{=URL('static','images/logo.png')}}" />
+			  </div>
+			</div>
+			<div class="sixteen columns">
+			  <div class="statusbar clearfix">
+				{{block statusbar}}
+				<div class="breadcrumbs">{{=request.function.replace('_', ' ').title()}}</div>
+				<div id="languageselect" style="float:right">
+					<script>
+						function set_lang(lang) {
+							var date = new Date();
+							cookieDate=date.setTime(date.getTime()+(100*24*60*60*1000));
+							document.cookie='all_lang='+lang+';expires='+cookieDate+'';
+							window.location.reload();
+						};
+					</script>
+					<select name="adminlanguage" onchange="set_lang(jQuery(this).val())" style="width: 100px;">
+						{{for language in T.get_possible_languages():}}
+							<option {{=T.accepted_language==language and 'selected' or ''}} value="{{=language}}">{{=T(language)}}</option>
+						{{pass}}
+					</select>
+				</div>
+				
+				{{end}}
+			  </div>
+			</div>
+		  </div>
+		</div>
 
     <div class="main">
       <div class="container">                 

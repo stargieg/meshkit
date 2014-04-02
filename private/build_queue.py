@@ -81,10 +81,10 @@ class BuildImages(object):
         self.Profile = profile
         self.Pubkeys = pubkeys
         self.Pkgs = pkgs or ''
-        if not noconf == True:
-            self.Pkgs += ' meshwizard'
-        if wifi0vap == True or wifi1vap == True or wifi2vap == True:
-            self.Pkgs += ' hostapd-mini'
+        #if not noconf == True:
+        #    self.Pkgs += ' meshwizard'
+        #if wifi0vap == True or wifi1vap == True or wifi2vap == True:
+        #    self.Pkgs += ' hostapd-mini'
         self.Upload = upload
         self.Mail = mail # this is the mailaddress used to send mails after build
         self.Noconf = noconf
@@ -93,7 +93,7 @@ class BuildImages(object):
         self.Ipv6 = ipv6
         self.Ipv6_config = ipv6_config
         self.Location = location or ''
-        self.Community = community or 'augsburg'
+        self.Community = community or 'berlin'
         self.nodenumber = nodenumber or '1024'
         self.Nickname = nickname or ''
         self.Name = name or ''
@@ -430,45 +430,45 @@ class BuildImages(object):
 
 
         # Write config to etc/config/meshwizard
-        try:
-            f = open(os.path.join(self.FilesDirConfig, 'meshwizard'), "w")
-            try:
-                f.write(config)
-            finally:
-                f.close()
-        except IOError:
-            logger.critical("Could not write config!")
+        #try:
+        #    f = open(os.path.join(self.FilesDirConfig, 'meshwizard'), "w")
+        #    try:
+        #        f.write(config)
+        #    finally:
+        #        f.close()
+        #except IOError:
+        #    logger.critical("Could not write config!")
 
         # Make meshwizard start at bootime
-        filedir = os.path.join(request.folder, "private", "files")
-        initfile = os.path.join(filedir, 'wizard.init')
-        shutil.copy(initfile, os.path.join(self.FilesDirInit, 'wizard'))
-        try:
-            os.symlink('/etc/init.d/wizard', os.path.join(self.FilesDirRc, 'S99wizard'))
-        except OSError, e:
-            if e.errno == errno.EEXIST:
-                pass
+        # filedir = os.path.join(request.folder, "private", "files")
+        # initfile = os.path.join(filedir, 'wizard.init')
+        # shutil.copy(initfile, os.path.join(self.FilesDirInit, 'wizard'))
+        # try:
+        #    os.symlink('/etc/init.d/wizard', os.path.join(self.FilesDirRc, 'S99wizard'))
+        # except OSError, e:
+        #    if e.errno == errno.EEXIST:
+        #        pass
 
         # Write /etc/config/meshkit containing current configuration
-	#config_meshkit = 'config "meshkit" "update"\n'
+        #config_meshkit = 'config "meshkit" "update"\n'
         #for o in self.__dict__:
         #    v = "{key}\t'{value}'".format(key=o, value=self.__dict__[o])
         #    config_meshkit += '\toption' + '\t' + v + '\n'
 
-        config_meshkit = add_section('meshkit', 'update')
-        if self.Profile:
-            config_meshkit += add_option('profile', self.Profile)
-        config_meshkit += add_option('target', self.Target)
-        config_meshkit += add_option('url', self.Url)
+        #config_meshkit = add_section('meshkit', 'update')
+        #if self.Profile:
+        #    config_meshkit += add_option('profile', self.Profile)
+        #config_meshkit += add_option('target', self.Target)
+        #config_meshkit += add_option('url', self.Url)
 
-        try:
-            f = open(os.path.join(self.FilesDirConfig, 'meshkit'), "w")
-            try:
-                f.write(config_meshkit)
-            finally:
-                f.close()
-        except IOError:
-            logger.critical("Could not write /etc/config/meshkit!")
+        #try:
+        #    f = open(os.path.join(self.FilesDirConfig, 'meshkit'), "w")
+        #    try:
+        #        f.write(config_meshkit)
+        #    finally:
+        #        f.close()
+        #except IOError:
+        #    logger.critical("Could not write /etc/config/meshkit!")
 
 
     
@@ -552,7 +552,8 @@ class BuildImages(object):
             else:
                 option_pkgs = " "
 
-            cmd = "cd " + config.buildroots_dir + "/" + self.Target + "; make image " + option_profile + option_pkgs + " BIN_DIR='" + self.BinDir + "' " + option_files
+            logger.info('make packeges: %s', str(option_pkgs))
+            cmd = "cd " + config.buildroots_dir + "/" + self.Target + "; make image DEVICE_TYPE='' " + option_profile + option_pkgs + " BIN_DIR='" + self.BinDir + "' " + option_files
             ret = subprocess.call([cmd, ""], stdout=out, stderr=subprocess.STDOUT, shell=True)
             builder.build_links_json()
             if ret != 0:

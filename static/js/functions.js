@@ -7,15 +7,15 @@ function addpackage(package) {
 
 function loadScript(url, callback)
 {
-   var head = document.getElementsByTagName('head')[0];
-   var script = document.createElement('script');
-   script.type = 'text/javascript';
-   script.src = url;
-
-   script.onreadystatechange = callback;
-   script.onload = callback;
-
-   head.appendChild(script);
+	var head = document.getElementsByTagName('head')[0];
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = url;
+	
+	script.onreadystatechange = callback;
+	script.onload = callback;
+	
+	head.appendChild(script);
 }
 
 function themepkgs() {
@@ -49,61 +49,61 @@ function themeselect(themeoptions) {
 /* from http://www.websemantics.co.uk/resources/accessible_form_help/scripts/showhide.js */
 
 function addEvent(func){
-  if (!document.getElementById | !document.getElementsByTagName) return
-  var oldonload=window.onload
-  if (typeof window.onload != 'function') {window.onload=func}
-  else {window.onload=function() {oldonload(); func()}}
+	if (!document.getElementById | !document.getElementsByTagName) return
+		var oldonload=window.onload;
+	if (typeof window.onload != 'function') {window.onload=func}
+	else {window.onload=function() {oldonload(); func()}}
 }
 
-addEvent(hideAll)
+addEvent(hideAll);
 
 function hideAll(){
-  var obj,nextspan,anchor,content
-
-  // get all spans
-  obj=document.getElementsByTagName('span')
-
-  // run through them
-  for (var i=0;i<obj.length;i++){
-
-    // if it has a class of helpLink
-    if(/helpLink/.test(obj[i].className)){
-
-      // get the adjacent span
-      nextspan=obj[i].nextSibling
-      while(nextspan.nodeType!=1) nextspan=nextspan.nextSibling
-
-       // hide it
-      nextspan.style.display='none'
-
-      //create a new link
-      anchor=document.createElement('a')
-
-      // copy original helpLink text and add attributes
-      content=document.createTextNode(obj[i].firstChild.nodeValue)
-      anchor.appendChild(content)
-      anchor.href='#help'
-      anchor.title='Click to show help'
-      anchor.className=obj[i].className
-      anchor.nextspan=nextspan
-      anchor.innerHTML='?'
-      anchor.onclick=function(){showHide(this.nextspan);changeTitle(this);return false}
-      // replace span with created link
-      obj[i].replaceChild(anchor,obj[i].firstChild)
-    }
-  }
+	var obj,nextspan,anchor,content;
+	
+	// get all spans
+	obj=document.getElementsByTagName('span');
+	
+	// run through them
+	for (var i=0;i<obj.length;i++){
+	
+		// if it has a class of helpLink
+		if(/helpLink/.test(obj[i].className)){
+			
+			// get the adjacent span
+			nextspan=obj[i].nextSibling
+			while(nextspan.nodeType!=1) nextspan=nextspan.nextSibling;
+			
+			// hide it
+			nextspan.style.display='none';
+			
+			//create a new link
+			anchor=document.createElement('a');
+			
+			// copy original helpLink text and add attributes
+			content=document.createTextNode(obj[i].firstChild.nodeValue);
+			anchor.appendChild(content);
+			anchor.href='#help';
+			anchor.title='Click to show help';
+			anchor.className=obj[i].className;
+			anchor.nextspan=nextspan;
+			anchor.innerHTML='?';
+			anchor.onclick=function(){showHide(this.nextspan);changeTitle(this);return false};
+			// replace span with created link
+			obj[i].replaceChild(anchor,obj[i].firstChild);
+		}
+	}
 }
 
 // used to flip helpLink title
 function changeTitle(obj){
-  if(obj)
-    obj.title = obj.title=='Click to show help' ? 'Click to hide help' : 'Click to show help'
+	if(obj)
+		obj.title = obj.title=='Click to show help' ? 'Click to hide help' : 'Click to show help';
 }
 
 // used to flip the display property
 function showHide(obj){
-  if(obj)
-    obj.style.display = obj.style.display=='none' ? 'block' : 'none'
+	if(obj)
+		obj.style.display = obj.style.display=='none' ? 'block' : 'none';
 }
 
 /* End helplinktoggle */
@@ -111,15 +111,15 @@ function showHide(obj){
 /* Toggle Divs */
 
 function ToggleDiv(DivID)
-{   
-    if (document.getElementById(DivID).style.display == "block")
-    {   
-        document.getElementById(DivID).style.display = "none";
-    }   
-    else
-    {   
-        document.getElementById(DivID).style.display = "block";
-    }
+{
+	if (document.getElementById(DivID).style.display == "block")
+	{
+		document.getElementById(DivID).style.display = "none";
+	}
+	else
+	{
+		document.getElementById(DivID).style.display = "block";
+	}
 }
 
 function displayselect(obj,id1,id2) {
@@ -181,13 +181,13 @@ function handleContent()
 
 function handleProfilePkgs()
 {
-        if (xmlHttpObject.readyState == 4)
-        {
+	if (xmlHttpObject.readyState == 4)
+	{
 		profilepackages=xmlHttpObject.responseText
 		profilepackages=eval( "(" + profilepackages + ")" );
 		var e = document.getElementById('imageconf_profile');
-		var sel = e.options[e.selectedIndex].value
-                profilepackages = profilepackages['info'][sel]['packages']
+		var sel = e.options[e.selectedIndex].value;
+		profilepackages = profilepackages['info'][sel]['packages'];
 		update_defaultpkgs();
 	}
 }
@@ -196,10 +196,10 @@ function handleProfilePkgs()
 
 function ProfilePkgs(content)
 {
-        xmlHttpObject.open('get',content);
-        xmlHttpObject.onreadystatechange = handleProfilePkgs;
-        xmlHttpObject.send(null);
-        return false;
+	xmlHttpObject.open('get',content);
+	xmlHttpObject.onreadystatechange = handleProfilePkgs;
+	xmlHttpObject.send(null);
+	return false;
 }
 
 
@@ -216,15 +216,20 @@ function sort_unique(array) {
 function update_defaultpkgs() {
 
 	if( typeof profilepackages != "undefined") {
-		packages = profilepackages
-	};
-        addpackages = '';
+		packages = profilepackages;
+	}
+	addpackages = '';
 	if( typeof user_packagelist != "undefined") {
 		if (document.getElementById('imageconf_packages')) {
 			addpackages += " " + user_packagelist;
 		}
 	}
 
+	if( typeof freifunkpackages != "undefined") { addpackages += " " + freifunkpackages };
+	if( typeof meshkitpackages != "undefined") { addpackages += " " + meshkitpackages };
+	if( typeof minimalpackages != "undefined") { addpackages += " " + minimalpackages };
+	if( typeof vpnpackages != "undefined") { addpackages += " " + vpnpackages };
+	if( typeof fullpackages != "undefined") { addpackages += " " + fullpackages };
 	if( typeof lucipackages != "undefined") { addpackages += " " + lucipackages };
 	if( typeof themepackages != "undefined") { addpackages += " " + themepackages };
 	if( typeof defaultpackages != "undefined") { packages += " " + defaultpackages };
@@ -235,7 +240,7 @@ function update_defaultpkgs() {
 
 	packages = packages.split(" ").sort();
 	packages = packages.join(" ");
-	addpackages = addpackages.split(" ")
+	addpackages = addpackages.split(" ");
 	addpackages = sort_unique(addpackages);
 	addpackages = trim(addpackages.join(" "));
 
@@ -246,7 +251,6 @@ function update_defaultpkgs() {
 	if (document.getElementById('imageconf_packages')) {
 		document.getElementById('imageconf_packages').value = addpackages;
 	}
-
 }
 
 /* End package list */
