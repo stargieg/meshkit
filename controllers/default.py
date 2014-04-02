@@ -147,13 +147,15 @@ def wizard():
         vap = c.get(community_defaults, 'profile', 'vap', '0')
         session.theme = c.get(community_defaults, 'profile', 'theme', config.defaulttheme)
     else:
-        session.communitysupport == False
+        session.communitysupport = False
         lucipackages = config.lucipackages
         freifunkpackages = config.freifunkpackages
         meshkitpackages = config.meshkitpackages
         minimalpackages = config.minimalpackages
         vpnpackages = config.vpnpackages
         fullpackages = config.fullpackages
+        vap = 0
+        nodenumber = False
         community_defaults = dict()
         
     session.localrestrict=True
