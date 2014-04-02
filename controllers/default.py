@@ -57,11 +57,10 @@ def index():
         session.community = auth.user.community
     else:
         user_email = ''
-        session.community = ''
+        session.community = 'berlin'
         
     form = SQLFORM.factory(db.imageconf)
     modellist = '{'
-    i = 1
     for k in sorted(config_modellist.keys()):
         modellist += k + ":" + str(config_modellist[k]) + ","
     modellist += '}'
@@ -111,7 +110,8 @@ def wizard():
     session.profiles = get_profiles(config.buildroots_dir, session.target, os.path.join(request.folder, "static", "ajax"))
     form = SQLFORM(db.imageconf)
     # session.profiles = get_profiles(config.buildroots_dir, session.target, os.path.join(request.folder, "static", "ajax"))
-    defaultpkgs = get_defaultpkgs(config.buildroots_dir, session.target, os.path.join(request.folder, "static", "ajax"))
+    # defaultpkgs = get_defaultpkgs(config.buildroots_dir, session.target, os.path.join(request.folder, "static", "ajax"))
+    defaultpkgs = ['']
     session.theme = config.defaulttheme
     # generate a static package list (this is only done once).
     # if package lists change delete the cache file in static/package_lists/<target>
@@ -124,8 +124,14 @@ def wizard():
         community_defaults = c.read()
         nodenumber = ''
         # Add meshwizard to defaultpackages and lucipackages
-        defaultpkgs.append('meshwizard')
-        lucipackages = config.lucipackages + " luci-app-meshwizard"
+        # defaultpkgs.append('meshwizard')
+        # lucipackages = config.lucipackages + " luci-app-meshwizard"
+        lucipackages = config.lucipackages
+        freifunkpackages = config.freifunkpackages
+        meshkitpackages = config.meshkitpackages
+        minimalpackages = config.minimalpackages
+        vpnpackages = config.vpnpackages
+        fullpackages = config.fullpackages
         session.communitysupport = True
         latitude = c.get(community_defaults, 'profile', 'latitude', '48')
         longitude = c.get(community_defaults, 'profile', 'longitude', '10')
@@ -143,6 +149,11 @@ def wizard():
     else:
         session.communitysupport == False
         lucipackages = config.lucipackages
+        freifunkpackages = config.freifunkpackages
+        meshkitpackages = config.meshkitpackages
+        minimalpackages = config.minimalpackages
+        vpnpackages = config.vpnpackages
+        fullpackages = config.fullpackages
         community_defaults = dict()
         
     session.localrestrict=True
@@ -214,12 +225,16 @@ def wizard():
         longitude = form.vars.longitude or ''
         
     hash = hashlib.md5(str(datetime.datetime.now()) + str(random.randint(1,999999999))).hexdigest()
-    return dict(form=form, packages='',rand=hash, defaultpkgs=defaultpkgs, lucipackages=lucipackages, nodenumber=nodenumber,
-                lat=latitude, lon=longitude, defchannel=defchannel, defip=defip,
-                community_packages=community_packages  + " " + config.add_defaultpackages,
-                user_packagelist=user_packagelist, addpackages='',
-                ipv6_packages=ipv6_packages, formhelpers=formhelpers
-                )
+    return dict(form=form, packages='',rand=hash, defaultpkgs='',
+        lucipackages=lucipackages, freifunkpackages=freifunkpackages,
+        meshkitpackages=meshkitpackages, minimalpackages=minimalpackages,
+        vpnpackages=vpnpackages, fullpackages=fullpackages,
+        nodenumber=nodenumber,
+        lat=latitude, lon=longitude, defchannel=defchannel, defip=defip,
+        community_packages=community_packages,
+        user_packagelist=user_packagelist, addpackages='',
+        ipv6_packages=ipv6_packages, formhelpers=formhelpers
+        )
 
 def build():
     queuedimg = str(cache.ram('queuedimg',lambda:len(db(db.imageconf.status=='1').select()),time_expire=60))

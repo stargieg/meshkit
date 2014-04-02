@@ -30,7 +30,22 @@ db.define_table('config',
         requires=IS_MATCH('^[a-zA-Z0-9,\s]*$', error_message=T('%(name)s is invalid') % dict(name=T('Webinterfaces')))
     ),
     Field('lucipackages',
-        requires=IS_MATCH('^[a-zA-Z0-9\s-]*$', error_message=T('%(name)s is invalid') % dict(name=T('Lucipackages')))
+        requires=IS_MATCH('^[a-zA-Z0-9\s-]*$', error_message=T('%(name)s is invalid') % dict(name=T('Luci packages')))
+    ),
+    Field('freifunkpackages',
+        requires=IS_MATCH('^[a-zA-Z0-9\s-]*$', error_message=T('%(name)s is invalid') % dict(name=T('Freifunk packages')))
+    ),
+    Field('meshkitpackages',
+        requires=IS_MATCH('^[a-zA-Z0-9\s-]*$', error_message=T('%(name)s is invalid') % dict(name=T('Meshkit packages')))
+    ),
+    Field('minimalpackages',
+        requires=IS_MATCH('^[a-zA-Z0-9\s-]*$', error_message=T('%(name)s is invalid') % dict(name=T('Minimal packages')))
+    ),
+    Field('vpnpackages',
+        requires=IS_MATCH('^[a-zA-Z0-9\s-]*$', error_message=T('%(name)s is invalid') % dict(name=T('VPN packages')))
+    ),
+    Field('fullpackages',
+        requires=IS_MATCH('^[a-zA-Z0-9\s-]*$', error_message=T('%(name)s is invalid') % dict(name=T('Full packages')))
     ),
     Field('defaulttheme',
         requires=IS_MATCH('^[a-zA-Z0-9-]*$', error_message=T('%(name)s is invalid') % dict(name=T('Defaulttheme')))

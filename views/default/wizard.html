@@ -6,6 +6,11 @@
 <script type="text/javascript">communitypackages = '{{=community_packages}}'</script>
 <script type="text/javascript">nosharepackages = ''</script>
 <script type="text/javascript">lucipackages = ''</script>
+<script type="text/javascript">freifunkpackages = ''</script>
+<script type="text/javascript">meshkitpackages = ''</script>
+<script type="text/javascript">minimalpackages = ''</script>
+<script type="text/javascript">vpnpackages = ''</script>
+<script type="text/javascript">fullpackages = ''</script>
 <script type="text/javascript">ipv6packages = '{{=ipv6_packages}}'</script>
 <script type="text/javascript">user_packagelist = '{{=user_packagelist}}'</script>
 <script type="text/javascript">addpackages = '{{=addpackages}}'</script>
@@ -75,10 +80,10 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
         {{
         field_webif = formhelpers.formfield()
         field_webif.Name = 'webif'
-        field_webif.Label = T('Webinterface')
+        field_webif.Label = T('Package Set')
         field_webif.Valuelist = config.webifs
         field_webif.Valueselected = form.vars.webif
-        field_webif.Helptext = T('Webinterface that is installed. This may remove or add packages depending on your selection.')
+        field_webif.Helptext = T('Package Set. This may remove or add packages depending on your selection.')
         field_webif.Special = 'onchange="themeselect()"'
         field_webif = field_webif.select()
         }}
@@ -434,7 +439,7 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
 			wifi_dhcp_range_wrap_end = "</div>";
 			wifi_dhcp_range = wifi_dhcp_range_wrap_start + wifi_dhcp_range_label + wifi_dhcp_range_input + wifi_dhcp_range_wrap_end;
 
-			/* VAP */
+			// VAP
 			checked = ''
 			for (var i=0; i<wifi_limit; i++) {
 			  var v = eval("v_wifi" + i + "_vap");
@@ -883,13 +888,88 @@ $( "#accordion" ).accordion({ heightStyle: "content" });
     var selected = e.options[e.selectedIndex].value;
     if ( selected == "none" ) {
       document.getElementById("theme_options").innerHTML = '';
+      freifunkpackages= "";
+      meshkitpackages= "";
+      minimalpackages= "";
+      vpnpackages= "";
+      fullpackages= "";
       lucipackages = "";
       themepackages= "";
       update_defaultpkgs();
     };
+    if ( selected == "freifunk" ) {
+      var newdiv = '{{=field_theme}}'
+      document.getElementById("theme_options").innerHTML = newdiv;
+      freifunkpackages = "{{=freifunkpackages}}";
+      meshkitpackages= "";
+      minimalpackages= "";
+      vpnpackages= "";
+      fullpackages= "";
+      lucipackages= "";
+      themepkgs();
+      update_defaultpkgs();
+      hideAll();
+    };
+    if ( selected == "meshkit" ) {
+      var newdiv = '{{=field_theme}}'
+      document.getElementById("theme_options").innerHTML = newdiv;
+      freifunkpackages= "";
+      meshkitpackages = "{{=meshkitpackages}}";
+      minimalpackages= "";
+      vpnpackages= "";
+      fullpackages= "";
+      lucipackages= "";
+      themepkgs();
+      update_defaultpkgs();
+      hideAll();
+    };
+    if ( selected == "minimal" ) {
+      var newdiv = '{{=field_theme}}'
+      document.getElementById("theme_options").innerHTML = newdiv;
+      freifunkpackages= "";
+      meshkitpackages= "";
+      minimalpackages = "{{=minimalpackages}}";
+      vpnpackages= "";
+      fullpackages= "";
+      lucipackages= "";
+      themepkgs();
+      update_defaultpkgs();
+      hideAll();
+    };
+    if ( selected == "vpn" ) {
+      var newdiv = '{{=field_theme}}'
+      document.getElementById("theme_options").innerHTML = newdiv;
+      freifunkpackages= "";
+      meshkitpackages= "";
+      minimalpackages= "";
+      vpnpackages = "{{=vpnpackages}}";
+      fullpackages= "";
+      lucipackages= "";
+      themepkgs();
+      update_defaultpkgs();
+      hideAll();
+    };
+    if ( selected == "full" ) {
+      var newdiv = '{{=field_theme}}'
+      document.getElementById("theme_options").innerHTML = newdiv;
+      freifunkpackages= "";
+      meshkitpackages= "";
+      minimalpackages= "";
+      vpnpackages= "";
+      fullpackages = "{{=fullpackages}}";
+      lucipackages= "";
+      themepkgs();
+      update_defaultpkgs();
+      hideAll();
+    };
     if ( selected == "luci" ) {
       var newdiv = '{{=field_theme}}'
       document.getElementById("theme_options").innerHTML = newdiv;
+      freifunkpackages= "";
+      meshkitpackages= "";
+      minimalpackages= "";
+      vpnpackages= "";
+      fullpackages= "";
       lucipackages = "{{=lucipackages}}";
       themepkgs();
       update_defaultpkgs();
